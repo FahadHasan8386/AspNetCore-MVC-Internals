@@ -1,4 +1,4 @@
-namespace StudentManagement.Models
+namespace FirstMVCApp.Models
 {
     public class ErrorViewModel
     {
