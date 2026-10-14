@@ -9,14 +9,13 @@ namespace StudentMangementSystem.Controllers
         {
             return View();
         }
-
         public IActionResult GetStudent()
         {
             var students = new List<Student>
             {
-                new Student { Id = 1, name = "John Doe" },
-                new Student { Id = 2, name = "Jane Smith" },
-                new Student { Id = 3, name = "Michael Johnson" }
+                new Student { Id = 1, Name = "John Doe" },
+                new Student { Id = 2, Name = "Jane Smith" },
+                new Student { Id = 3, Name = "Michael Johnson" }
             };
             return View(students);
         }
