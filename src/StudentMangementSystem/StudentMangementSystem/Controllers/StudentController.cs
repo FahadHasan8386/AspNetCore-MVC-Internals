@@ -1,30 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using StudentMangementSystem.Models;
 
 namespace StudentMangementSystem.Controllers
 {
     public class StudentController : Controller
     {
-        private static readonly List<Student> students = new()
+        private static List<Student> students = new()
         {
-            new Student { Id = 1, Name = "Fahad Hasan" },
-            new Student { Id = 2, Name = "Alice Rahman" },
-            new Student { Id = 3, Name = "John Doe" },
-            new Student { Id = 4, Name = "Jane Smith" },
-            new Student { Id = 5, Name = "Michael Johnson" }
+            new Student { Id = 1, Name = "Fahad Hasan", Email = "fahad@example.com", Phone = "01711111111", StudentCode = "ST001" },
+            new Student { Id = 2, Name = "Alice Rahman", Email = "alice@example.com", Phone = "01722222222", StudentCode = "ST002" },
+            new Student { Id = 3, Name = "John Doe", Email = "john@example.com", Phone = "01733333333", StudentCode = "ST003" }
         };
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult GetStudent()
+
+        // READ
+        [HttpGet]
+        public IActionResult GetStudents()
         {
             return View(students);
         }
 
-        public IActionResult AddStudent()
+        // CREATE
+        [HttpPost]
+        public IActionResult AddStudent(Student student)
         {
-             return View();
+            student.Id = students.Count == 0 ? 1 : students.Max(s => s.Id) + 1;
+
+            students.Add(student);
+
+            return RedirectToAction("GetStudents");
+        }
+
+        // UPDATE
+        [HttpPost]
+        public IActionResult EditStudent(Student updatedStudent)
+        {
+            var student = students.FirstOrDefault(s => s.Id == updatedStudent.Id);
+
+            if (student == null)
+                return NotFound();
+
+            student.Name = updatedStudent.Name;
+            student.Email = updatedStudent.Email;
+            student.Phone = updatedStudent.Phone;
+            student.StudentCode = updatedStudent.StudentCode;
+
+            return RedirectToAction("GetStudents");
+        }
+
+        // DELETE
+        [HttpPost]
+        public IActionResult DeleteStudent(int id)
+        {
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            if (student != null)
+            {
+                students.Remove(student);
+            }
+
+            return RedirectToAction("GetStudents");
         }
     }
 }
