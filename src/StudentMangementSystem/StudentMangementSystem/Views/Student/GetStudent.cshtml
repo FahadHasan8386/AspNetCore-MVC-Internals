@@ -1,35 +1,45 @@
-﻿@{
-	ViewData["Title"] = "Get Student";
+﻿@model List<StudentMangementSystem.Models.Student>
 
-
+@{
+    ViewData["Title"] = "Student List";
 }
-<h4 class="mb-3">Student List</h4>
 
-<div class="container">
-	<table class="table table-bordered table-striped">
-		<thead class="table-dark">
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-			</tr>
-		</thead>
-		<tbody>
-			@if(Model != null && Model.Count > 0)
-			{
-				foreach(var student in Model)
-				{
-					<tr>
-						<td>@student.Id</td>
-						<td>@student.Name</td>
-					</tr>
-				}
-			}
-			else
-			{
-				<tr>
-					<td colspan="2">No students found.</td>
-				</tr>
-			}
-		</tbody>
-	</tabl>
+<div class="container mt-4">
+    <h2 class="mb-3">Student List</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Student Code</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Id</td>
+                        <td>@student.StudentCode</td>
+                        <td>@student.Name</td>
+                        <td>@student.Email</td>
+                        <td>@student.Phone</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">
+                        No students found.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
