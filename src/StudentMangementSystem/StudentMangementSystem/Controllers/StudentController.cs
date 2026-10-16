@@ -15,7 +15,7 @@ namespace StudentMangementSystem.Controllers
 
         // READ
         [HttpGet]
-        public IActionResult GetStudents()
+        public IActionResult GetStudent()
         {
             return View(students);
         }
