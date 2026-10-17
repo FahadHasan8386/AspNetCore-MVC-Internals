@@ -7,6 +7,12 @@
 <div class="container mt-4">
     <h2 class="mb-3">Student List</h2>
 
+    <a asp-controller="Student"
+       asp-action="AddStudent"
+       class="btn btn-primary mb-3">
+        + Create Student
+    </a>
+
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -15,6 +21,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
@@ -29,13 +36,34 @@
                         <td>@student.Name</td>
                         <td>@student.Email</td>
                         <td>@student.Phone</td>
+
+                        <td>
+                            <a asp-controller="Student"
+                               asp-action="EditStudent"
+                               asp-route-id="@student.Id"
+                               class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+
+                            <form asp-controller="Student"
+                                  asp-action="DeleteStudent"
+                                  asp-route-id="@student.Id"
+                                  method="post"
+                                  style="display:inline">
+
+                                <button type="submit"
+                                        class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan="6" class="text-center">
                         No students found.
                     </td>
                 </tr>
