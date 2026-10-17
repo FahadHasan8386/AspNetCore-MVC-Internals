@@ -20,17 +20,38 @@ namespace StudentMangementSystem.Controllers
             return View(students);
         }
 
-        // CREATE
+        // GET: /Student/AddStudent
+        [HttpGet]
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
+
+        // POST: /Student/AddStudent
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddStudent(Student student)
         {
-            student.Id = students.Count == 0 ? 1 : students.Max(s => s.Id) + 1;
+            student.Id = students.Count == 0
+                ? 1
+                : students.Max(s => s.Id) + 1;
 
             students.Add(student);
 
-            return RedirectToAction("GetStudents");
+            return RedirectToAction(nameof(GetStudent));
         }
 
+        // GET: /Student/EditStudent/1
+        [HttpGet]
+        public IActionResult EditStudent(int id)
+        {
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            if (student == null)
+                return NotFound();
+
+            return View(student);
+        }
         // UPDATE
         [HttpPost]
         public IActionResult EditStudent(Student updatedStudent)
