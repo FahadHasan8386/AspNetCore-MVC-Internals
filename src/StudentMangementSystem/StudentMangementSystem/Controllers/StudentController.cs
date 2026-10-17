@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using StudentMangementSystem.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentMangementSystem.Controllers
 {
@@ -8,26 +10,47 @@ namespace StudentMangementSystem.Controllers
     {
         private static List<Student> students = new()
         {
-            new Student { Id = 1, Name = "Fahad Hasan", Email = "fahad@example.com", Phone = "01711111111", StudentCode = "ST001" },
-            new Student { Id = 2, Name = "Alice Rahman", Email = "alice@example.com", Phone = "01722222222", StudentCode = "ST002" },
-            new Student { Id = 3, Name = "John Doe", Email = "john@example.com", Phone = "01733333333", StudentCode = "ST003" }
+            new Student
+            {
+                Id = 1,
+                Name = "Fahad Hasan",
+                Email = "fahad@example.com",
+                Phone = "01711111111",
+                StudentCode = "ST001"
+            },
+            new Student
+            {
+                Id = 2,
+                Name = "Alice Rahman",
+                Email = "alice@example.com",
+                Phone = "01722222222",
+                StudentCode = "ST002"
+            },
+            new Student
+            {
+                Id = 3,
+                Name = "John Doe",
+                Email = "john@example.com",
+                Phone = "01733333333",
+                StudentCode = "ST003"
+            }
         };
 
-        // READ
+        // READ: Display all students
         [HttpGet]
         public IActionResult GetStudent()
         {
             return View(students);
         }
 
-        // GET: /Student/AddStudent
+        // GET: Show Add Student form
         [HttpGet]
         public IActionResult AddStudent()
         {
             return View();
         }
 
-        // POST: /Student/AddStudent
+        // POST: Add a new student
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddStudent(Student student)
@@ -41,7 +64,7 @@ namespace StudentMangementSystem.Controllers
             return RedirectToAction(nameof(GetStudent));
         }
 
-        // GET: /Student/EditStudent/1
+        // GET: Show existing student data
         [HttpGet]
         public IActionResult EditStudent(int id)
         {
@@ -52,11 +75,14 @@ namespace StudentMangementSystem.Controllers
 
             return View(student);
         }
-        // UPDATE
+
+        // POST: Save edited student data
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditStudent(Student updatedStudent)
         {
-            var student = students.FirstOrDefault(s => s.Id == updatedStudent.Id);
+            var student = students.FirstOrDefault(
+                s => s.Id == updatedStudent.Id);
 
             if (student == null)
                 return NotFound();
@@ -66,21 +92,24 @@ namespace StudentMangementSystem.Controllers
             student.Phone = updatedStudent.Phone;
             student.StudentCode = updatedStudent.StudentCode;
 
-            return RedirectToAction("GetStudents");
+            return RedirectToAction(nameof(GetStudent));
         }
 
-        // DELETE
+        // POST: Delete a student
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteStudent(int id)
         {
             var student = students.FirstOrDefault(s => s.Id == id);
 
-            if (student != null)
+            if (student == null)
             {
-                students.Remove(student);
+                return NotFound();
             }
 
-            return RedirectToAction("GetStudents");
+            students.Remove(student);
+
+            return RedirectToAction(nameof(GetStudent));
         }
     }
 }
