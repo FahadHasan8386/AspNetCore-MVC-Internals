@@ -1,8 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using StudentMangementSystem.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace StudentMangementSystem.Controllers
 {
@@ -13,114 +11,79 @@ namespace StudentMangementSystem.Controllers
             new Course
             {
                 Id = 1,
-                CourseCode = "CSC101",
-                CourseName = "Introduction to Computer Science",
+                CourseName = "Advanced Programming",
+                CourseCode = "CSC4164",
                 Credit = 3,
-                Description = "Basic computer science concepts"
+                Description = "This course covers advanced programming concepts and techniques."
             },
             new Course
             {
                 Id = 2,
-                CourseCode = "CSC201",
-                CourseName = "Object Oriented Programming",
+                CourseName = "Database Management",
+                CourseCode = "CSC3210",
                 Credit = 3,
-                Description = "OOP concepts using C#"
-            },
-            new Course
-            {
-                Id = 3,
-                CourseCode = "CSC301",
-                CourseName = "Database Management System",
-                Credit = 4,
-                Description = "Database design and SQL"
+                Description = "This course covers database design and management concepts."
             }
         };
 
-        // Display all courses
-        [HttpGet]
-        public IActionResult GetCourse()
+        public IActionResult Index()
         {
             return View(courses);
         }
 
-        // Show Add Course form
-        [HttpGet]
         public IActionResult AddCourse()
         {
             return View();
         }
 
-        // Add a new course
         [HttpPost]
         public IActionResult AddCourse(Course course)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(course);
-            }
-
             course.Id = courses.Count == 0
                 ? 1
                 : courses.Max(c => c.Id) + 1;
 
             courses.Add(course);
 
-            return RedirectToAction(nameof(GetCourse));
+            return RedirectToAction("Index");
         }
 
-        // Show existing course data
-        [HttpGet]
         public IActionResult EditCourse(int id)
         {
             var course = courses.FirstOrDefault(c => c.Id == id);
 
             if (course == null)
-            {
                 return NotFound();
-            }
 
             return View(course);
         }
 
-        //  Save edited course data
         [HttpPost]
         public IActionResult EditCourse(Course updatedCourse)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(updatedCourse);
-            }
-
             var course = courses.FirstOrDefault(
                 c => c.Id == updatedCourse.Id);
 
             if (course == null)
-            {
                 return NotFound();
-            }
 
-            course.CourseCode = updatedCourse.CourseCode;
             course.CourseName = updatedCourse.CourseName;
+            course.CourseCode = updatedCourse.CourseCode;
             course.Credit = updatedCourse.Credit;
-            course.Description = updatedCourse.Description;
 
-            return RedirectToAction(nameof(GetCourse));
+            return RedirectToAction("Index");
         }
 
-        // Delete a course
-        [HttpPost]
         public IActionResult DeleteCourse(int id)
         {
             var course = courses.FirstOrDefault(c => c.Id == id);
 
             if (course == null)
-            {
                 return NotFound();
-            }
 
             courses.Remove(course);
 
-            return RedirectToAction(nameof(GetCourse));
+            return RedirectToAction("Index");
         }
     }
 }
