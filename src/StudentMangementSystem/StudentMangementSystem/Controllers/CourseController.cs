@@ -39,9 +39,7 @@ namespace StudentMangementSystem.Controllers
         [HttpPost]
         public IActionResult AddCourse(Course course)
         {
-            course.Id = courses.Count == 0
-                ? 1
-                : courses.Max(c => c.Id) + 1;
+            course.Id = courses.Count == 0 ? 1 : courses.Max(c => c.Id) + 1;
 
             courses.Add(course);
 
