@@ -36,21 +36,21 @@ namespace StudentMangementSystem.Controllers
             }
         };
 
-        // READ: Display all students
+        // Display all students
         [HttpGet]
         public IActionResult GetStudent()
         {
             return View(students);
         }
 
-        // GET: Show Add Student form
+        // Show Add Student form
         [HttpGet]
         public IActionResult AddStudent()
         {
             return View();
         }
 
-        // POST: Add a new student
+        //  Add a new student
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddStudent(Student student)
@@ -64,7 +64,7 @@ namespace StudentMangementSystem.Controllers
             return RedirectToAction(nameof(GetStudent));
         }
 
-        // GET: Show existing student data
+        // Show existing student data
         [HttpGet]
         public IActionResult EditStudent(int id)
         {
@@ -76,9 +76,8 @@ namespace StudentMangementSystem.Controllers
             return View(student);
         }
 
-        // POST: Save edited student data
+        //  Save edited student data
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult EditStudent(Student updatedStudent)
         {
             var student = students.FirstOrDefault(
@@ -95,9 +94,8 @@ namespace StudentMangementSystem.Controllers
             return RedirectToAction(nameof(GetStudent));
         }
 
-        // POST: Delete a student
+        //  Delete a student
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult DeleteStudent(int id)
         {
             var student = students.FirstOrDefault(s => s.Id == id);
