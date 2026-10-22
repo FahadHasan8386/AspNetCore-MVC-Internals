@@ -1,0 +1,33 @@
+﻿@model StudentMangementSystem.Models.Course
+
+<div class="container mt-4">
+	<h2>Add Course</h2>
+
+	<form asp-action="AddCourse" method="post">
+
+		<div class="mb-3">
+			<label asp-for="CourseName" class="form-label">Course Name</label>
+			<input asp-for="CourseName" class="form-control" />
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="CourseCode" class="form-label">Course Code</label>
+			<input asp-for="CourseCode" class="form-control" />
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="Credit" class="form-label">Credit</label>
+			<input asp-for="Credit" class="form-control" />
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="Description" class="form-label">Description</label>
+			<textarea asp-for="Description" class="form-control"></textarea>
+		</div>
+
+		<button type="submit" class="btn btn-success">Add Course</button>
+
+		<a asp-action="Index" class="btn btn-secondary">Back</a>
+	</form>
+</div
+
