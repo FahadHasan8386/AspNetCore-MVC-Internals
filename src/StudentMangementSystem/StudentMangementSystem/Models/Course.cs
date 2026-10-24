@@ -13,7 +13,8 @@ namespace StudentMangementSystem.Models
         [Required]
         public string CourseName { get; set; } = string.Empty;
 
-        [Range(1, 6)]
+        [Range(1, 10)]
+        [MaxValue(5)]
         public int Credit { get; set; }
 
         public string? Description { get; set; }

@@ -41,6 +41,11 @@ namespace StudentMangementSystem.Controllers
         {
             course.Id = courses.Count == 0 ? 1 : courses.Max(c => c.Id) + 1;
 
+            if (!ModelState.IsValid)
+            {
+                return View(course);
+            }
+
             courses.Add(course);
 
             return RedirectToAction("Index");
