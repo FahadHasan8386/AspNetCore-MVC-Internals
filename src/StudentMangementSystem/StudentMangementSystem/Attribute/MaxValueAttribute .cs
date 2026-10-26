@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StudentMangementSystem.Models
+namespace StudentMangementSystem.Attribute
 {
     public class MaxValueAttribute : ValidationAttribute
     {
