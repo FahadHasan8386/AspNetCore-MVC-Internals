@@ -1,0 +1,20 @@
+﻿@model LabTask50204.Models.Books.Book
+
+<h2>Book Details</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model?.Title</td>
+            <td>@Model?.Author</td>
+            <td>@Model?.Price</td>
+        </tr>
+    </tbody>
+</table>
