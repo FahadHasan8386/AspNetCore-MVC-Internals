@@ -1,4 +1,5 @@
 ﻿
+using StudentMangementSystem.Attribute;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentMangementSystem.Models
