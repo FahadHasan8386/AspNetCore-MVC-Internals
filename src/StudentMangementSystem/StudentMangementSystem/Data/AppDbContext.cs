@@ -1,6 +1,6 @@
 ﻿namespace StudentMangementSystem.Data
 {
-    public class Class
+    public class AppDbContext
     {
     }
 }
