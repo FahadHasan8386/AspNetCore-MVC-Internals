@@ -4,9 +4,23 @@ namespace EmployeeCrud.Controllers
 {
     public class EmployeeController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+
+        public EmployeeController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public IActionResult ExcellenceAward()
+        {
+            // LINQ query filtering eligible employees
+            var eligibleEmployees = _context.Employees
+                .Where(e => e.PerformanceScore >= 4.5 &&
+                            e.LowestProjectRating > 3.7 &&
+                            e.TotalProjectsCompleted >= 6)
+                .ToList();
+
+            return View(eligibleEmployees);
         }
     }
 }
