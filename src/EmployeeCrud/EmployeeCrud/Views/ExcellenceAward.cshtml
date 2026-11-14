@@ -1,0 +1,29 @@
+﻿
+
+@{
+    ViewData["Title"] = "Excellence Award Eligible Employees";
+}
+
+<h2>Excellence Award Eligible Employees</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Employee ID</th>
+            <th>Performance Score</th>
+            <th>Lowest Project Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.EmployeeName</td>
+                <td>@emp.EmployeeId</td>
+                <td>@emp.PerformanceScore</td>
+                <td>@emp.LowestProjectRating</td>
+            </tr>
+        }
+    </tbody>
+</table>
