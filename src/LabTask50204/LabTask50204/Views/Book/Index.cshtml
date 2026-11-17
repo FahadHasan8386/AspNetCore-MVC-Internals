@@ -1,20 +1,29 @@
-﻿@model LabTask50204.Models.Books.Book
+﻿@model IEnumerable<LabTask50204.Models.Book>
 
-<h2>Book Details</h2>
+@{
+    ViewData["Title"] = "Book List";
+}
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model?.Title</td>
-            <td>@Model?.Author</td>
-            <td>@Model?.Price</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h2 class="mb-3">Library Books</h2>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>BookId</th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.BookId</td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
